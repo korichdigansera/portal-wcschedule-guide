@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>世界杯赛程 · 专题导览</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background: #f5fbfa;
+      color: #1b2e2b;
+      line-height: 1.6;
+      padding: 0 1.25rem 3rem;
+    }
+
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    /* 杂志式首页横幅 */
+    .hero {
+      background: linear-gradient(135deg, #0f3d3a 0%, #1b6b61 60%, #2a8f82 100%);
+      border-radius: 2.5rem;
+      padding: 3.5rem 2rem;
+      margin: 2rem 0 2.5rem;
+      color: white;
+      box-shadow: 0 12px 30px rgba(22, 83, 75, 0.25);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -30%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(4px);
+      padding: 0.3rem 1.2rem;
+      border-radius: 40px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      margin-bottom: 1.2rem;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .hero h1 {
+      font-size: 2.8rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      max-width: 600px;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      opacity: 0.85;
+      margin-top: 1rem;
+      max-width: 540px;
+      line-height: 1.7;
+    }
+
+    /* 背景说明 */
+    .context-card {
+      background: white;
+      border-radius: 28px;
+      padding: 1.8rem 2rem;
+      margin: 2rem 0 2.2rem;
+      box-shadow: 0 4px 16px rgba(0, 40, 35, 0.06);
+      border-left: 6px solid #289b8a;
+    }
+
+    .context-card h2 {
+      font-size: 1.6rem;
+      font-weight: 500;
+      color: #0f3d3a;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .context-card p {
+      color: #2c4a46;
+      font-size: 1.05rem;
+    }
+
+    /* 三段自然介绍 · 网格卡片 */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.6rem;
+      margin: 2.5rem 0 3rem;
+    }
+
+    .grid-card {
+      background: white;
+      border-radius: 24px;
+      padding: 1.8rem 1.6rem 2rem;
+      box-shadow: 0 4px 12px rgba(21, 84, 73, 0.06);
+      transition: transform 0.15s ease, box-shadow 0.2s ease;
+      border: 1px solid #d9ece8;
+    }
+
+    .grid-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 28px rgba(25, 90, 80, 0.10);
+      border-color: #79c9be;
+    }
+
+    .card-icon {
+      width: 44px;
+      height: 44px;
+      background: #dff3ef;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: #1b6b61;
+    }
+
+    .grid-card h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #0f3d3a;
+      margin-bottom: 0.5rem;
+    }
+
+    .grid-card p {
+      color: #3d5e59;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .grid-card .highlight-link {
+      display: inline-block;
+      margin-top: 1rem;
+      color: #1b7b6d;
+      font-weight: 500;
+      text-decoration: none;
+      border-bottom: 2px solid transparent;
+      transition: border 0.2s;
+    }
+
+    .grid-card .highlight-link:hover {
+      border-bottom-color: #1b7b6d;
+    }
+
+    /* 页尾访问提示 */
+    .visit-footer {
+      background: #0e3a36;
+      border-radius: 28px;
+      padding: 2.2rem 2rem;
+      margin: 3rem 0 1.5rem;
+      color: white;
+      text-align: center;
+      box-shadow: 0 8px 0 #082b27;
+    }
+
+    .visit-footer p {
+      font-size: 1.12rem;
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto 0.6rem;
+    }
+
+    .visit-footer .inline-link {
+      color: #b3f0e6;
+      font-weight: 600;
+      text-decoration: none;
+      border-bottom: 2px solid rgba(179, 240, 230, 0.4);
+      transition: border 0.2s, color 0.2s;
+    }
+
+    .visit-footer .inline-link:hover {
+      color: white;
+      border-bottom-color: white;
+    }
+
+    .footer-meta {
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      opacity: 0.6;
+      letter-spacing: 0.3px;
+    }
+
+    /* 移动端适配 */
+    @media (max-width: 640px) {
+      body { padding: 0 0.75rem 2rem; }
+      .hero { padding: 2.5rem 1.5rem; border-radius: 2rem; }
+      .hero h1 { font-size: 2rem; }
+      .hero p { font-size: 1rem; }
+      .context-card { padding: 1.4rem 1.2rem; }
+      .context-card h2 { font-size: 1.3rem; }
+      .feature-grid { gap: 1.2rem; }
+      .grid-card { padding: 1.4rem 1.2rem; }
+      .visit-footer { padding: 1.8rem 1.2rem; }
+    }
+
+    @media (max-width: 400px) {
+      .hero h1 { font-size: 1.7rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- 首页横幅 hero -->
+  <div class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">⚽ 专题 · 赛事时间</div>
+      <h1>每一场激战<br>都值得准时守候</h1>
+      <p>从小组赛的锋芒初露，到淘汰赛的步步惊心——<br>用最清晰的赛历，不错过任何一个高光时刻。</p>
+    </div>
+  </div>
+
+  <!-- 背景说明 -->
+  <div class="context-card">
+    <h2>📋 为什么需要一个稳定入口</h2>
+    <p>世界杯赛程跨度长、时区复杂，加之平台信息分散，常常让人反复查询却仍有遗漏。一个集中、更新及时且不会被淹没在资讯流中的页面，恰好能解决这个烦恼。你可以把它当作赛期的“第一站”，每次想看下一场对阵，就不再需要四处翻找。</p>
+  </div>
+
+  <!-- 三段自然介绍（网格卡片） -->
+  <div class="feature-grid">
+
+    <div class="grid-card">
+      <div class="card-icon">🗓️</div>
+      <h3>完整赛历一览</h3>
+      <p>无论你支持哪支球队，小组赛、十六强、半决赛直到决赛，所有日期与场地都以简洁的时间线呈现。提前规划你的看球日程，赛前提醒也可以自己设置。</p>
+      <a href="https://portal-wcschedule.com" class="highlight-link">世界杯赛程</a>
+    </div>
+
+    <div class="grid-card">
+      <div class="card-icon">🌍</div>
+      <h3>跨时区友好</h3>
+      <p>很多精彩对决发生在深夜或凌晨。页面内置了时区参考与比赛当地时间，不用再做额外换算。对于海外球迷，这也是一个贴心的细节。</p>
+      <a href="https://portal-wcschedule.com" class="highlight-link">世界杯赛程</a>
+    </div>
+
+    <div class="grid-card">
+      <div class="card-icon">📱</div>
+      <h3>手机随时查阅</h3>
+      <p>在通勤、午休或聚会间隙，滑开手机就能显示最近一场比赛。卡片式设计适配各种屏幕，不需要缩放或左右滑动，信息一目了然。</p>
+      <a href="https://portal-wcschedule.com" class="highlight-link">世界杯赛程</a>
+    </div>
+  </div>
+
+  <!-- 页尾访问提示 -->
+  <div class="visit-footer">
+    <p>把 <a href="https://portal-wcschedule.com" class="inline-link">世界杯赛程</a> 加入收藏夹或设为常用标签，整个赛期你都能迅速找到它。有时候最可靠的方式，就是一个简单的书签。</p>
+    <div class="footer-meta">⚡ 赛程数据持续更新 · 建议赛事期间定期回访</div>
+  </div>
+
+  <!-- 装饰性信息（非链接） -->
+  <div style="text-align: center; font-size: 0.8rem; color: #7a9f99; margin-top: 1.2rem;">
+    从稳定入口开始，享受每一场对决。
+  </div>
+</div>
+</body>
+</html>
